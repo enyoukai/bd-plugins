@@ -4,7 +4,7 @@
  * @author Enyoukai
  * @authorLink https://github.com/enyoukai/
  * @version 0.0.1
- * @source https://raw.githubusercontent.com/enyoukai/bd-plugins/main/YoutubeDL.plugin.js
+ * @source https://github.com/enyoukai/bd-plugins/blob/main/YoutubeDL.plugin.js
  * 
  */
 const fs = require('fs');
