@@ -47,6 +47,7 @@ class YoutubeDL {
 
         var url = args[1];
         
+        BdApi.showToast("Downloading Video", {type:"info"});
         childProcess.exec('youtube-dl --restrict-filenames -o ' + this.tmp_dir + '\\%(title)s-%(id)s.%(ext)s ' + url, (err, stdout, stderr) => {
             if (err) return BdApi.showToast(err, {type:"error"});
    
