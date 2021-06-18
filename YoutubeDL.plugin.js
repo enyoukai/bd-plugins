@@ -6,7 +6,6 @@
  * @version 0.0.1
  * @source https://raw.githubusercontent.com/enyoukai/bd-plugins/main/YoutubeDL.plugin.js
  */
-
 const fs = require('fs');
 const childProcess = require('child_process');
 
@@ -45,8 +44,9 @@ class YoutubeDL {
         if (args.length !== 2 || args[0] !== this.prefix) return returnValue(...methodArguments);
 
         var url = args[1];
-        
+
         BdApi.showToast("Downloading Video", {type:"info"});
+
         childProcess.exec('youtube-dl --restrict-filenames -o ' + this.tmp_dir + '\\%(title)s-%(id)s.%(ext)s ' + url, (err, stdout, stderr) => {
             if (err) return BdApi.showToast(err, {type:"error"});
    
