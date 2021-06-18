@@ -28,7 +28,7 @@ class YoutubeDL {
         }
         
         childProcess.exec('youtube-dl -h', (err, stdout, stderr) => {
-            if (err) BdApi.showConfirmationModal("youtube-dl not found in path", ["This plugin cannot be used if youtube-dl is not installed or not in your path"], {danger: true});
+            if (err) BdApi.alert("youtube-dl not found in path", "This plugin cannot be used if youtube-dl is not installed or not in your path");
         });
 
         // Qwerasd's word notifications
