@@ -1,6 +1,6 @@
 /**
  * @name YoutubeDL
- * @description Easily download and upload videos in discord
+ * @description Easily download and upload videos in discord by typing y-dl {url}
  * @author Enyoukai
  * @authorLink https://github.com/enyoukai/
  * @version 0.0.1
@@ -31,7 +31,7 @@ class YoutubeDL {
         });
 
         // Qwerasd's word notifications
-        this.prefix = BdApi.loadData("YoutubeDL", "prefix") ? BdApi.loadData("YoutubeDL", "prefix") : "";
+        this.prefix = BdApi.loadData("YoutubeDL", "prefix") ? BdApi.loadData("YoutubeDL", "prefix") : "/ydl";
         this.upload = BdApi.findModuleByProps("instantBatchUpload").upload;
         this.sendMessagePatch = BdApi.monkeyPatch(BdApi.findModuleByProps("sendMessage"), 'sendMessage', {instead: this.sendMessage.bind(this)});
     }
@@ -80,7 +80,8 @@ getSettingsPanel() {
         const prefix = document.createElement('textarea');
 
         prefixT.textContent = "Prefix"
-        prefix.placeholder = "y-dl";
+        prefix.placeholder = "/ydl";
+        prefix.value = this.prefix;
         prefix.style.width = "100%";
         prefix.addEventListener("change", e => {
             this.prefix = prefix.value;
