@@ -19,11 +19,8 @@ class OwOfy {
     }
 
     owoConvert(content) {       
-        content = content.replace(/r/g, 'w');
-        content = content.replace(/l/g, 'w');
+        content = content.replace(/r|l/gi, 'w');
 
-        content = content.replace(/R/g, 'W'); // lol
-        content = content.replace(/L/g, 'W');
         content += ' owo';
         
 
