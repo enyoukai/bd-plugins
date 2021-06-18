@@ -4,8 +4,8 @@
  * @author Enyoukai
  * @authorLink https://github.com/enyoukai/
  * @version 0.0.1
- * @source https://github.com/enyoukai/bd-plugins/blob/main/YoutubeDL.plugin.js
- * 
+ * @source https://raw.githubusercontent.com/enyoukai/bd-plugins/main/YoutubeDL.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/enyoukai/bd-plugins/main/YoutubeDL.plugin.js
  */
 const fs = require('fs');
 const childProcess = require('child_process');
@@ -34,15 +34,15 @@ class YoutubeDL {
         // Qwerasd's word notifications
         this.prefix = BdApi.loadData("YoutubeDL", "prefix") ? BdApi.loadData("YoutubeDL", "prefix") : "/ydl";
         this.upload = BdApi.findModuleByProps("instantBatchUpload").upload;
-        this.sendMessagePatch = BdApi.monkeyPatch(BdApi.findModuleByProps("sendMessage"), 'sendMessage', {instead: this.sendMessage.bind(this)});
+        this.sendMessagePatch = BdApi.Patcher.instead("",BdApi.findModuleByProps("sendMessage"), 'sendMessage', this.sendMessage.bind(this));
     }
 
-    sendMessage(data) {
-        const channelId = data.methodArguments[0];
-        const content = data.methodArguments[1].content;
+    sendMessage(thisObject, methodArguments, returnValue) {              
+        const channelId = methodArguments[0];
+        const content = methodArguments[1].content;
         const args = content.split(' ');
-        
-        if (args.length !== 2 || args[0] !== this.prefix) return data.callOriginalMethod();
+
+        if (args.length !== 2 || args[0] !== this.prefix) return returnValue(...methodArguments);
 
         var url = args[1];
         
@@ -81,7 +81,7 @@ getSettingsPanel() {
         const prefix = document.createElement('textarea');
 
         prefixT.textContent = "Prefix"
-        prefix.placeholder = "/ydl";
+        prefix.placeholder = "Whatever prefix you want";
         prefix.value = this.prefix;
         prefix.style.width = "100%";
         prefix.addEventListener("change", e => {
