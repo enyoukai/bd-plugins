@@ -1,6 +1,6 @@
 /**
  * @name YoutubeDL
- * @description Easily download and upload videos in discord by typing y-dl {url}
+ * @description Easily download and upload videos in discord using youtube-dl
  * @author Enyoukai
  * @authorLink https://github.com/enyoukai/
  * @version 0.0.1
