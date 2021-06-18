@@ -45,7 +45,7 @@ class YoutubeDL {
 
         var url = args[1];
         
-        childProcess.exec('youtube-dl -o ' + this.tmp_dir + '\\%(title)s-%(id)s.%(ext)s ' + url, (err, stdout, stderr) => {          
+        childProcess.exec('youtube-dl --restrict-filenames -o ' + this.tmp_dir + '\\%(title)s-%(id)s.%(ext)s ' + url, (err, stdout, stderr) => {          
             let output = stdout;
             console.log(output); // uhhh debug stuff
 
@@ -56,8 +56,9 @@ class YoutubeDL {
             let file_path = matches[0];
             let file_split = file_path.split('\\');
             let filename = file_split[file_split.length - 1];
-                        
             
+            // https://stackoverflow.com/questions/20856197/remove-non-ascii-character-in-string
+            filename.replace(/[^\x00-\x7F]/g, "");
             fs.readFile(file_path, (err, buffer) => {
                 if (err) return console.error(err);
                 this.upload(channelId, new Blob([buffer]), 0, "", false, filename);
